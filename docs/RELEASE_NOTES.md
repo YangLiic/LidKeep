@@ -1,5 +1,7 @@
 # LidKeep 1.0.0-rc.2
 
+**⬇ 下载 / Download:** [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg) · [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip)
+
 English · 简体中文
 
 ## English

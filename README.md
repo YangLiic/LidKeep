@@ -1,7 +1,7 @@
 <p align="center"><img src="Resources/AppIcon.svg" width="112" alt="LidKeep icon"></p>
 <h1 align="center">LidKeep</h1>
 <p align="center">Close your MacBook. Keep your work running.</p>
-<p align="center"><a href="../../releases">Download</a> · <a href="docs/USAGE.md">User guide</a> · <a href="README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg"><strong>⬇ Download DMG</strong></a> · <a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip">App ZIP</a> · <a href="docs/USAGE.md">User guide</a> · <a href="README.zh-CN.md">简体中文</a></p>
 
 LidKeep is a lightweight, native macOS utility that keeps downloads, builds and long-running tasks moving when your MacBook is closed or locked. No external display required.
 
@@ -15,7 +15,7 @@ LidKeep is a lightweight, native macOS utility that keeps downloads, builds and 
 
 ## Download and install
 
-Download the **DMG or App ZIP** from [Releases](../../releases). Open the DMG (or extract the ZIP), drag `LidKeep.app` into **Applications**, and launch it from there.
+Download the [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg) or [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip). Open the DMG (or extract the ZIP), drag `LidKeep.app` into **Applications**, and launch it from there.
 
 **First launch:** Current `local` releases are not Apple-notarized. If macOS blocks LidKeep, click **Done**, then go to **System Settings → Privacy & Security → Security**, click **Open Anyway** for LidKeep, authenticate, and confirm **Open**. Only allow a download you trust. [Apple's instructions](https://support.apple.com/102445)
 

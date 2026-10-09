@@ -1,7 +1,7 @@
 <p align="center"><img src="Resources/AppIcon.svg" width="112" alt="LidKeep 图标"></p>
 <h1 align="center">LidKeep · 合盖继续</h1>
 <p align="center">合上 MacBook，让工作继续。</p>
-<p align="center"><a href="../../releases">下载</a> · <a href="docs/USAGE.zh-CN.md">使用说明</a> · <a href="README.md">English</a></p>
+<p align="center"><a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg"><strong>⬇ 下载 DMG</strong></a> · <a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip">App ZIP</a> · <a href="docs/USAGE.zh-CN.md">使用说明</a> · <a href="README.md">English</a></p>
 
 LidKeep 是轻巧的原生 macOS 工具，让下载、构建与长时间任务在合盖或锁屏后继续运行，无需外接显示器。
 
@@ -15,7 +15,7 @@ LidKeep 是轻巧的原生 macOS 工具，让下载、构建与长时间任务�
 
 ## 下载与安装
 
-在 [Releases](../../releases) 下载 **DMG 或 App ZIP**。打开 DMG（或解压 ZIP），将 `LidKeep.app` 拖入「应用程序」，再从那里启动。
+下载 [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg) 或 [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip)。打开 DMG（或解压 ZIP），将 `LidKeep.app` 拖入「应用程序」，再从那里启动。
 
 **首次打开：** 当前 `local` 版本未经过 Apple 公证。若被 macOS 拦截，点击「完成」，进入「系统设置 → 隐私与安全性」下方的「安全性」，点击 LidKeep 旁的「仍要打开」，完成认证后确认「打开」。仅放行可信来源的下载。[Apple 官方说明](https://support.apple.com/zh-cn/102445)
 
