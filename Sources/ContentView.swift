@@ -149,6 +149,39 @@ struct ContentView: View {
             .buttonStyle(ActionButtonStyle(kind: .restore, size: .main))
             .disabled(model.busy || PowerManager.preview)
             .keyboardShortcut("r", modifiers: [.command])
+
+            Divider().padding(.vertical, 2)
+            Text(L.text("Screen while awake"))
+                .font(.subheadline.weight(.medium))
+            Picker(L.text("Screen while awake"), selection: Binding(
+                get: { model.screenPolicy },
+                set: { model.setScreenPolicy($0) }
+            )) {
+                ForEach(ScreenPolicy.allCases, id: \.self) { policy in
+                    Text(policy.title).tag(policy)
+                }
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .disabled(model.busy || PowerManager.preview)
+            Label(L.text("Auto screen off: closing the lid turns off the built-in display and keyboard backlight."), systemImage: "moon")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Label(L.text("Remote control remains available while your Mac stays awake."), systemImage: "network")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(L.text("Without an external display. Opening the lid restores brightness; screen-lock display timing follows System Settings."))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            if model.screenPolicy == .automatic, model.status.externalDisplays == 0, !model.backlightControlAvailable {
+                Text(L.text("Backlight control is unavailable on this Mac. Existing display behavior is preserved."))
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .lidKeepPanel()
     }
@@ -192,6 +225,11 @@ struct ContentView: View {
             Text(L.text("Triggered when the last external display disconnects with the lid closed. Standby or turning a monitor off may leave it online."))
                 .font(.caption)
                 .foregroundStyle(.secondary)
+
+            Text(L.text("With the lid closed, the built-in display and keyboard backlight should remain off, whether the Mac sleeps or stays awake."))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
 
             DisplayOffRow(title: L.text("AC power"), sleeps: $draftDisplayOffAC, disabled: model.busy || PowerManager.preview)
             DisplayOffRow(title: L.text("Battery"), sleeps: $draftDisplayOffBattery, disabled: model.busy || PowerManager.preview)

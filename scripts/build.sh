@@ -8,7 +8,7 @@ app=dist/LidKeep.app
 mkdir -p .build "$app/Contents/MacOS" "$app/Contents/Resources"
 for arch in arm64 x86_64; do
   xcrun swiftc -target "$arch-apple-macosx14.0" -sdk "$sdk" -swift-version 5 -warnings-as-errors -O \
-    -framework SwiftUI -framework AppKit -framework Combine -framework CoreGraphics \
+    -framework SwiftUI -framework AppKit -framework Combine -framework CoreGraphics -framework IOKit \
     -o ".build/LidKeep-$arch" Sources/*.swift
 done
 xcrun lipo -create .build/LidKeep-arm64 .build/LidKeep-x86_64 -output "$app/Contents/MacOS/LidKeep"

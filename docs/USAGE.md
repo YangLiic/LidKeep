@@ -12,6 +12,14 @@ AC and battery policies are independent. Lock delays are available when keep-awa
 
 The display rule runs when the last external display disconnects with the lid closed. Choosing sleep suspends keep-awake. Monitor standby may leave the display online.
 
+## Screen while awake
+
+The screen policy defaults to **Auto screen off**. With keep-awake enabled and no external display, closing the lid immediately turns off the built-in backlight while keeping the display session available for remote capture. The keyboard backlight also goes dark on lid closure through macOS. Opening the lid restores the previous screen brightness. Screen-lock display timing follows System Settings.
+
+The background service continues after the app quits. **Keep screen on** skips backlight control and prevents idle display sleep while closed, or open and unlocked; it does not wake a sleeping display. Connected external displays use their existing behavior. Disabling or suspending keep-awake, restoring settings, or uninstalling releases screen control and restores any brightness changed by LidKeep.
+
+Backlight control depends on an undocumented macOS interface. Unsupported hardware retains its existing display behavior. Closed-lid lights-off behavior and remote control have been confirmed on the tested M4; other Macs and remote software require their own checks.
+
 ## Restore and uninstall
 
 **Restore original power settings** restores the settings saved before the first change. To remove LidKeep, choose **Uninstall power helper**, authorize, quit, then move the app to Trash. [Recovery instructions](UNINSTALL.md)

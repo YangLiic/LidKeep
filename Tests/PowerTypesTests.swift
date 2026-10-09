@@ -48,6 +48,40 @@ import Foundation
         precondition(policy.pmsetSleepMinutes == 1)
         var status = PowerStatus(); status.lidAvailable = true; status.screenLocked = true
         precondition(PowerParsing.shouldSleepAfterLock(status, policy: policy))
+        precondition(ScreenPolicy.load(from: preferences) == .automatic)
+        preferences.set("invalid", forKey: ScreenPolicy.preferenceKey)
+        precondition(ScreenPolicy.load(from: preferences) == .automatic)
+        preferences.set(ScreenPolicy.keepOn.rawValue, forKey: ScreenPolicy.preferenceKey)
+        precondition(ScreenPolicy.load(from: preferences) == .keepOn)
+        var screenStatus = PowerStatus()
+        screenStatus.lidAvailable = true
+        screenStatus.lidAwakeWanted = true
+        screenStatus.sleepDisabled = true
+        screenStatus.displayInfoAvailable = true
+        screenStatus.lidClosed = true
+        precondition(ScreenPolicy.automatic.action(status: screenStatus) == .darkenBuiltInDisplay)
+        precondition(ScreenPolicy.keepOn.action(status: screenStatus) == .preventDisplayIdleSleep)
+        screenStatus.displayInfoAvailable = false
+        precondition(ScreenPolicy.automatic.action(status: screenStatus) == .none)
+        screenStatus.displayInfoAvailable = true
+        screenStatus.externalDisplays = 1
+        for policy in ScreenPolicy.allCases {
+            precondition(policy.action(status: screenStatus) == .none)
+        }
+        screenStatus.externalDisplays = 0
+        screenStatus.lidClosed = false
+        precondition(ScreenPolicy.automatic.action(status: screenStatus) == .none)
+        precondition(ScreenPolicy.keepOn.action(status: screenStatus) == .preventDisplayIdleSleep)
+        screenStatus.screenLocked = true
+        for policy in ScreenPolicy.allCases { precondition(policy.action(status: screenStatus) == .none) }
+        for policy in ScreenPolicy.allCases {
+            screenStatus.suspended = true
+            precondition(policy.action(status: screenStatus) == .none)
+            screenStatus.suspended = false
+            screenStatus.lidAwakeWanted = false
+            precondition(policy.action(status: screenStatus) == .none)
+            screenStatus.lidAwakeWanted = true
+        }
         status.lidClosed = true
         precondition(!PowerParsing.shouldSleepAfterLock(status, policy: policy))
         status.lidClosed = false; status.lidAwakeWanted = true

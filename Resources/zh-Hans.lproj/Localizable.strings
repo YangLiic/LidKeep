@@ -103,3 +103,13 @@
 "cli.help" = "LidKeep · 合盖继续 — 控制 MacBook 休眠\n用法：lidkeep <命令>\n  status                 查看电源、屏幕盖和显示器状态\n  doctor                 查看环境与安装诊断（字段名使用英文）\n  on                     保持唤醒，覆盖合盖与锁屏休眠\n  restore | off          允许系统休眠，不恢复空闲时间\n  restore-system         恢复首次修改前的电源设置\n  ac-awake               插电时不进行空闲休眠\n  battery-awake          电池供电时不进行空闲休眠\n  ac-sleep [分钟]        设置插电空闲休眠时间（0、1、5、10、30）\n  battery-sleep [分钟]   设置电池空闲休眠时间（0、1、5、10、30）\n  help                   查看帮助\n0 表示界面中立即请求锁屏休眠，对应系统空闲时间为 1 分钟。\n锁屏与外接屏断开策略需要 App 持续运行。\n退出不会恢复设置；卸载前请使用 restore-system。";
 "Error: %@" = "错误：%@";
 "Lock screen: ⌃⌘Q" = "锁屏快捷键：⌃⌘Q";
+"Auto screen off" = "自动熄屏";
+"Keep screen on" = "保持亮屏";
+"Screen while awake" = "保活时屏幕";
+"Screen policy: %@" = "屏幕策略：%@";
+"Brightness could not be restored. Open the lid and try again; the saved brightness has been retained." = "未能恢复亮度。请开盖后重试，原始亮度记录已保留。";
+"Backlight control is unavailable on this Mac. Existing display behavior is preserved." = "此 Mac 暂不支持背光控制，保留原有显示行为。";
+"With the lid closed, the built-in display and keyboard backlight should remain off, whether the Mac sleeps or stays awake." = "合盖时，无论是否休眠，MacBook 内置屏幕与键盘背光都应保持熄灭。";
+"Auto screen off: closing the lid turns off the built-in display and keyboard backlight." = "自动熄屏：合盖熄灭内置屏幕与键盘灯。";
+"Remote control remains available while your Mac stays awake." = "保持唤醒，仍可通过远程软件控制 MacBook。";
+"Without an external display. Opening the lid restores brightness; screen-lock display timing follows System Settings." = "无外接屏时生效。开盖恢复亮度，锁屏熄屏时间遵循系统设置。";

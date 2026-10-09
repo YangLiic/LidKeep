@@ -38,8 +38,10 @@ The first power change requires administrator authorization.
 Quitting does not restore power settings.
 To uninstall: choose Uninstall power helper, authorize, quit, then move the app to Trash.
 Builds labeled local are ad-hoc signed and not notarized.
-If macOS blocks a trusted download: click Done, open System Settings > Privacy & Security,
+First double-click LidKeep in Applications. If macOS blocks a trusted download, click Done,
+then open System Settings > Privacy & Security,
 scroll to Security, choose Open Anyway for LidKeep, authenticate, then confirm Open.
+Open Anyway appears only after an attempted launch is blocked.
 
 简体中文
 需要 macOS 14 或更新版本。将 LidKeep.app 拖入「应用程序」后打开。
@@ -47,8 +49,10 @@ App 支持中文与英文，可通过窗口中的语言选择器切换。
 首次修改电源设置需要管理员认证。退出不会恢复电源设置。
 卸载时请先选择「卸载电源助手」，完成认证，退出后将 App 移到废纸篓。
 标记为 local 的构建只有临时签名，未经过 Apple 公证。
-若 macOS 拦截可信下载：点击「完成」，进入「系统设置 > 隐私与安全性」下方的「安全性」，
+先在「应用程序」中双击 LidKeep。若 macOS 拦截可信下载：点击「完成」，
+再进入「系统设置 > 隐私与安全性」下方的「安全性」，
 点击 LidKeep 旁的「仍要打开」，完成认证，并在后续弹窗中确认「打开」。
+「仍要打开」只会在尝试打开并被拦截后出现。
 EOF
 python=.build/packaging-venv/bin/python
 if [[ ! -x "$python" ]]; then python3 -m venv .build/packaging-venv; fi

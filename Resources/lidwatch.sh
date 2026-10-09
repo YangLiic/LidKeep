@@ -1,4 +1,4 @@
 #!/bin/bash
-# Runs in the logged-in user's session; the root helper owns the hold/suspend state.
+# Runs without administrator privileges; the helper owns the hold/suspend state.
 set -euo pipefail
-exec /usr/bin/sudo -n /Library/PrivilegedHelperTools/com.ylc.lidkeep.helper hold
+exec "$(dirname "$0")/.watcher/LidKeep.app/Contents/MacOS/LidKeep" watch

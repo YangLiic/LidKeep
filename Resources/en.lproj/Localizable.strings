@@ -103,3 +103,13 @@
 "cli.help" = "LidKeep — control MacBook sleep behavior\nUsage: lidkeep <command>\n  status                 Read current power/display/lid state\n  doctor                 Read environment and installation diagnostics\n  on                     Disable sleep, including lid sleep\n  restore | off          Allow system sleep (does not restore idle timers)\n  restore-system         Restore the snapshot from before LidKeep changes\n  ac-awake               Set AC idle sleep to never\n  battery-awake          Set battery idle sleep to never\n  ac-sleep [minutes]     Set AC idle sleep (0, 1, 5, 10, 30)\n  battery-sleep [minutes] Set battery idle sleep (0, 1, 5, 10, 30)\n  help                   Show this help\n0 means immediate lock sleep in the GUI; the system idle timer is 1 minute.\nKeep the app running for screen-lock and display-disconnect policies.\nQuitting does not restore settings; use restore-system before uninstalling.";
 "Error: %@" = "Error: %@";
 "Lock screen: ⌃⌘Q" = "Lock screen: ⌃⌘Q";
+"Auto screen off" = "Auto screen off";
+"Keep screen on" = "Keep screen on";
+"Screen while awake" = "Screen while awake";
+"Screen policy: %@" = "Screen policy: %@";
+"Brightness could not be restored. Open the lid and try again; the saved brightness has been retained." = "Brightness could not be restored. Open the lid and try again; the saved brightness has been retained.";
+"Backlight control is unavailable on this Mac. Existing display behavior is preserved." = "Backlight control is unavailable on this Mac. Existing display behavior is preserved.";
+"With the lid closed, the built-in display and keyboard backlight should remain off, whether the Mac sleeps or stays awake." = "With the lid closed, the built-in display and keyboard backlight should remain off, whether the Mac sleeps or stays awake.";
+"Auto screen off: closing the lid turns off the built-in display and keyboard backlight." = "Auto screen off: closing the lid turns off the built-in display and keyboard backlight.";
+"Remote control remains available while your Mac stays awake." = "Remote control remains available while your Mac stays awake.";
+"Without an external display. Opening the lid restores brightness; screen-lock display timing follows System Settings." = "Without an external display. Opening the lid restores brightness; screen-lock display timing follows System Settings.";

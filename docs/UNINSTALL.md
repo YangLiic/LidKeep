@@ -15,7 +15,7 @@ If restoration fails, the root uninstaller stops before removing the helper. Inv
 
 Quit the App and run `./scripts/uninstall.sh` as your ordinary account. It asks for `sudo` authentication for the same bundled uninstaller. Do not invoke the entire script as root, because user LaunchAgent cleanup belongs to the logged-in account.
 
-The restored fields are only AC `sleep`, battery `sleep`, and global `disablesleep`. LidKeep does not change screen-lock or display-sleep settings. The snapshot is captured immediately before the first successful write attempt.
+The restored fields are only AC `sleep`, battery `sleep`, and global `disablesleep`. LidKeep does not change screen-lock or display-sleep timers. Any built-in brightness changed by the screen policy is restored before removing its background service. If brightness restoration fails, open the lid and retry; the brightness backup is retained. The snapshot is captured immediately before the first successful write attempt.
 
 ## Recovery
 

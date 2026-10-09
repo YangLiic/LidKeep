@@ -1,13 +1,15 @@
 <p align="center"><img src="Resources/AppIcon.svg" width="112" alt="LidKeep 图标"></p>
 <h1 align="center">LidKeep · 合盖继续</h1>
 <p align="center">合上 MacBook，让工作继续。</p>
-<p align="center"><a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg"><strong>⬇ 下载 DMG</strong></a> · <a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip">App ZIP</a> · <a href="docs/USAGE.zh-CN.md">使用说明</a> · <a href="README.md">English</a></p>
+<p align="center"><a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.dmg"><strong>⬇ 下载 DMG</strong></a> · <a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.zip">App ZIP</a> · <a href="docs/USAGE.zh-CN.md">使用说明</a> · <a href="README.md">English</a></p>
 
 LidKeep 是轻巧的原生 macOS 工具，让下载、构建与长时间任务在合盖或锁屏后继续运行，无需外接显示器。
 
 ## 功能
 
 - 💻 **合盖继续** — 保持 MacBook 唤醒，让正在进行的工作持续运行。
+- 🌙 **熄屏保活** — 选择合盖自动熄屏，内置屏幕与键盘灯一同熄灭，任务照常运行；也可保持亮屏。
+- 🛰️ **远程不中断** — 保留显示会话，熄屏后仍可通过远程软件操作 MacBook。
 - ⚡ **独立电源策略** — 分别配置插电与电池供电时的休眠行为和锁屏延迟。
 - 🖥️ **外接屏联动** — 外接屏断开后，按供电状态选择休眠或继续运行。
 - 🔄 **恢复与卸载** — 恢复原始电源设置，完整移除助手与后台服务。
@@ -15,7 +17,7 @@ LidKeep 是轻巧的原生 macOS 工具，让下载、构建与长时间任务�
 
 ## 下载与安装
 
-下载 [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg) 或 [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip)。打开 DMG（或解压 ZIP），将 `LidKeep.app` 拖入「应用程序」，再从那里启动。
+下载 [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.dmg) 或 [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.zip)。打开 DMG（或解压 ZIP），将 `LidKeep.app` 拖入「应用程序」，再从那里启动。
 
 **首次打开：** 当前版本未经过 Apple 公证。如遇系统拦截：
 

@@ -27,6 +27,17 @@ Record app version, model/chip, macOS, power source, display connection and resu
 | Second operation | Toggle lid policy again | No repeat authorization for compatible installed helper |
 | Path handling | Run from a location containing a space/apostrophe | Installation still uses the intended files |
 | No external display | Enable keep-awake, lock manually, close lid briefly | A local task continues; open lid and inspect status |
+| Closed-lid screen off | No external display; select Auto screen off, enable keep-awake, close lid | Built-in display and keyboard backlights go off; a local task and remote video/input continue |
+| Remote continuity | Auto screen off; no external display; close lid during a remote session; wait past the normal display timeout | Remote video updates and keyboard/mouse input respond; the local task continues |
+| Brightness recovery | Close lid, reopen; then repeat with a background-service restart while closed | Original brightness restored on opening; saved brightness survives restart |
+| Lock display timing | No external display; enable keep-awake; lock with lid open in both screen modes | No immediate screen-off request; system display timer applies |
+| Open and unlocked | Auto screen off; lid open and unlocked | No extra 1-minute idle timeout; system display settings apply |
+| Keep screen on | No external display; select Keep screen on while enabled; test open and closed | No brightness reduction; idle display sleep prevented; an already-sleeping display is not woken |
+| External display power off | Enable keep-awake with external display; close lid, turn monitor off | No proactive wake request; built-in screen remains off as before |
+| Background startup | Run `watch-check` from a copied App bundle | Real preferences, event observers and timer initialize; clean exit after 6 seconds; no power changes |
+| Background crash handling | Inspect the loaded LaunchAgent policy | `KeepAlive.Crashed` is false; a crash stops automatic restart |
+| Quit with screen policy | Auto screen off; quit App, close lid without external display | Background service still darkens the backlight while tasks and remote video continue |
+| Screen policy cleanup | Disable/suspend keep-awake or restore/uninstall | Display assertion released; original brightness restored |
 | Allow lid sleep | Restore lid sleep, close lid without a display | System sleep follows its normal policy |
 | Lock policy UI | Open Advanced settings / 高级设置 with keep-awake enabled | Controls disabled; override explanation shown; current lock summary says keep-awake overrides it |
 | Display-rule UI while enabled | Expand Advanced settings / 高级设置 with keep-awake enabled | Display policy remains editable and explains that sleep suspends keep-awake |
@@ -63,3 +74,7 @@ Do not enable another sleep utility during the test. `restore-system` restores t
 ## Publication gate
 
 Before GitHub publication, confirm name/license/copyright, hardware acceptance, and package signing status. Before calling the release stable `1.0.0`, finish the required manual cases and document outstanding compatibility limits. Release publication is a separate step from local builds and CI artifacts.
+
+## Confirmed hardware results
+
+On 2026-10-10, closed-lid built-in display/keyboard lights off and remote control were confirmed by the tester on an M4 MacBook running macOS 15.7.7. This result does not cover other models or all acceptance cases.

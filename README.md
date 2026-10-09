@@ -1,13 +1,15 @@
 <p align="center"><img src="Resources/AppIcon.svg" width="112" alt="LidKeep icon"></p>
 <h1 align="center">LidKeep</h1>
 <p align="center">Close your MacBook. Keep your work running.</p>
-<p align="center"><a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg"><strong>⬇ Download DMG</strong></a> · <a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip">App ZIP</a> · <a href="docs/USAGE.md">User guide</a> · <a href="README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.dmg"><strong>⬇ Download DMG</strong></a> · <a href="https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.zip">App ZIP</a> · <a href="docs/USAGE.md">User guide</a> · <a href="README.zh-CN.md">简体中文</a></p>
 
 LidKeep is a lightweight, native macOS utility that keeps downloads, builds and long-running tasks moving when your MacBook is closed or locked. No external display required.
 
 ## Features
 
 - 💻 **Keep working** — Keep your MacBook awake with the lid closed or the screen locked.
+- 🌙 **Lights off, work on** — Choose automatic screen off on lid closure: the built-in display and keyboard backlight go dark while tasks continue. Keep-screen-on is also available.
+- 🛰️ **Stay connected** — Retain the display session so your remote desktop software can keep controlling your MacBook with the backlight off.
 - ⚡ **Power-aware policies** — Configure sleep behavior and lock delays separately for AC and battery power.
 - 🖥️ **Display-aware behavior** — Sleep or stay awake when an external display disconnects, based on the power source.
 - 🔄 **Restore and remove** — Restore original power settings and completely remove the helper and background service.
@@ -15,7 +17,7 @@ LidKeep is a lightweight, native macOS utility that keeps downloads, builds and 
 
 ## Download and install
 
-Download the [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg) or [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip). Open the DMG (or extract the ZIP), drag `LidKeep.app` into **Applications**, and launch it from there.
+Download the [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.dmg) or [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.3/LidKeep-1.0.0-rc.3-universal-local.zip). Open the DMG (or extract the ZIP), drag `LidKeep.app` into **Applications**, and launch it from there.
 
 **First launch:** This release is not Apple-notarized. If macOS blocks it:
 

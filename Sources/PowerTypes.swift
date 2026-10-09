@@ -1,5 +1,36 @@
 import Foundation
 
+enum ScreenPolicy: String, CaseIterable {
+    case automatic, keepOn
+
+    static let preferenceKey = "screen.policy"
+    static let notificationName = Notification.Name("com.ylc.lidkeep.screenPolicyChanged")
+    static func load(from defaults: UserDefaults = .standard) -> ScreenPolicy {
+        ScreenPolicy(rawValue: defaults.string(forKey: preferenceKey) ?? "") ?? .automatic
+    }
+    var title: String {
+        switch self {
+        case .automatic: return L.text("Auto screen off")
+        case .keepOn: return L.text("Keep screen on")
+        }
+    }
+
+    func action(status: PowerStatus) -> ScreenAction {
+        guard status.lidAwakeWanted, status.sleepDisabled, !status.suspended,
+              status.lidAvailable, status.displayInfoAvailable, status.externalDisplays == 0 else { return .none }
+        switch self {
+        case .automatic:
+            return status.lidClosed ? .darkenBuiltInDisplay : .none
+        case .keepOn:
+            return status.screenLocked && !status.lidClosed ? .none : .preventDisplayIdleSleep
+        }
+    }
+}
+
+enum ScreenAction: Equatable {
+    case none, darkenBuiltInDisplay, preventDisplayIdleSleep
+}
+
 struct AfterLockPolicy: Equatable, Codable {
     var sleepAfterLock: Bool
     var delayMinutes: Int
@@ -25,6 +56,7 @@ struct PowerStatus: Equatable {
     var lidAwakeWanted = false
     var suspended = false
     var externalDisplays = 0
+    var displayInfoAvailable = false
 
     // Global keep-awake takes precedence over lock timers.
     var lockPolicyOverridden: Bool { lidAwakeWanted || sleepDisabled }

@@ -10,6 +10,11 @@ enum CLI {
                 throw PowerError.failed(L.text("Unexpected arguments. Run lidkeep help."))
             }
             switch cmd {
+            case "watch": return BackgroundWatcher.run()
+            case "restore-brightness":
+                guard !PowerManager.preview, !PowerManager.readStatus().lidAwakeWanted else { return 1 }
+                return BuiltInBacklight().restore() ? 0 : 1
+            case "watch-check": return BackgroundWatcher.run(readOnly: true, duration: 6)
             case "help", "-h", "--help": print(usage)
             case "status": printStatus()
             case "doctor":
@@ -23,6 +28,9 @@ enum CLI {
                 #endif
                 print("Helper v1 ready: \(PowerManager.helperReady)")
                 print("Read-only preview: \(PowerManager.preview)")
+                let brightness = BuiltInBrightnessAPI.display().flatMap { BuiltInBrightnessAPI.shared.read($0) }
+                print("Built-in backlight control available: \(brightness != nil)")
+                if let brightness = brightness { print("Built-in brightness: \(brightness)") }
                 printStatus()
             case "on": try PowerManager.enableLidAwake(); print(L.text("Keep-awake enabled."))
             case "off", "restore": try PowerManager.restoreLidSleep(); print(L.text("System sleep allowed."))
@@ -59,6 +67,8 @@ enum CLI {
         print("LidKeep keep-awake wanted: \(s.lidAwakeWanted)")
         print("Keep-awake suspended: \(s.suspended)")
         print("External displays: \(s.externalDisplays)")
+        print("Display information available: \(s.displayInfoAvailable)")
+        print("Screen policy: \(ScreenPolicy.load().rawValue)")
         print("System idle sleep / AC: \(s.sleepMinutesAC) min")
         print("System idle sleep / Battery: \(s.sleepMinutesBattery) min")
         print("Screen locked: \(s.screenLocked)")

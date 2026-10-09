@@ -31,16 +31,23 @@ enum PowerManager {
             status.lidAwakeWanted = fields.contains("wanted=1")
             status.suspended = fields.contains("suspended=1")
         }
-        status.externalDisplays = externalDisplayCount()
+        let displays = onlineDisplayInfo()
+        status.externalDisplays = displays.external
+        status.displayInfoAvailable = displays.available
         return status
     }
 
     static func externalDisplayCount() -> Int {
+        onlineDisplayInfo().external
+    }
+
+    private static func onlineDisplayInfo() -> (external: Int, available: Bool) {
         var count: UInt32 = 0
-        guard CGGetOnlineDisplayList(0, nil, &count) == .success, count > 0 else { return 0 }
+        guard CGGetOnlineDisplayList(0, nil, &count) == .success else { return (0, false) }
+        guard count > 0 else { return (0, true) }
         var ids = [CGDirectDisplayID](repeating: 0, count: Int(count))
-        guard CGGetOnlineDisplayList(UInt32(ids.count), &ids, &count) == .success else { return 0 }
-        return ids.prefix(Int(count)).filter { CGDisplayIsBuiltin($0) == 0 }.count
+        guard CGGetOnlineDisplayList(UInt32(ids.count), &ids, &count) == .success else { return (0, false) }
+        return (ids.prefix(Int(count)).filter { CGDisplayIsBuiltin($0) == 0 }.count, true)
     }
 
     private static func checkWritable() throws {
@@ -61,15 +68,20 @@ enum PowerManager {
         try requireHelper()
         try installLaunchAgent()
         try helperCommand(["lid-on"])
+        notifyScreenPolicyChanged()
     }
     static func restoreLidSleep() throws {
         try requireHelper()
         try helperCommand(["lid-off"])
+        notifyScreenPolicyChanged()
+        try restoreScreenBrightness()
     }
     static func restoreSystem() throws {
         try checkWritable()
         guard helperReady else { throw PowerError.failed(L.text("No working LidKeep helper is available. Install it before restoring settings.")) }
         try helperCommand(["restore-system"])
+        notifyScreenPolicyChanged()
+        try restoreScreenBrightness()
     }
     static func uninstall() throws {
         try checkWritable()
@@ -78,8 +90,9 @@ enum PowerManager {
         }
         try runAdmin(["/bin/bash", script.path].map(PowerParsing.shellQuote).joined(separator: " "))
         _ = execute("/bin/launchctl", ["bootout", "gui/\(getuid())/" + agentLabel])
+        try restoreScreenBrightness()
         let home = FileManager.default.homeDirectoryForCurrentUser
-        for path in ["Library/LaunchAgents/" + agentLabel + ".plist", "Library/Application Support/LidKeep/lidwatch.sh"] {
+        for path in ["Library/LaunchAgents/" + agentLabel + ".plist", "Library/Application Support/LidKeep/lidwatch.sh", "Library/Application Support/LidKeep/.watcher", "Library/Application Support/LidKeep/screen-brightness.json.lock"] {
             let file = home.appendingPathComponent(path)
             if FileManager.default.fileExists(atPath: file.path) { try FileManager.default.removeItem(at: file) }
         }
@@ -94,7 +107,17 @@ enum PowerManager {
     static func suspendAndSleep() throws {
         try checkWritable()
         try helperCommand(["suspend"])
+        notifyScreenPolicyChanged()
+        BuiltInBacklight().restore()
         try sleepNow()
+    }
+    private static func restoreScreenBrightness() throws {
+        guard BuiltInBacklight().restore() else {
+            throw PowerError.failed(L.text("Brightness could not be restored. Open the lid and try again; the saved brightness has been retained."))
+        }
+    }
+    static func notifyScreenPolicyChanged() {
+        DistributedNotificationCenter.default().postNotificationName(ScreenPolicy.notificationName, object: nil, userInfo: nil, deliverImmediately: true)
     }
     static func holdLidAwakeIfWanted() {
         guard !preview else { return }
@@ -144,11 +167,22 @@ enum PowerManager {
         let watch = support.appendingPathComponent("lidwatch.sh")
         try Data(contentsOf: bundled).write(to: watch, options: .atomic)
         try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: watch.path)
+        // Preserve the bundle metadata required by the executable's signature.
+        let staged = support.appendingPathComponent(".watcher-" + UUID().uuidString)
+        try FileManager.default.createDirectory(at: staged, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: staged) }
+        let watcherApp = staged.appendingPathComponent("LidKeep.app")
+        try FileManager.default.copyItem(at: Bundle.main.bundleURL, to: watcherApp)
+        let signature = execute("/usr/bin/codesign", ["--verify", "--deep", "--strict", watcherApp.path])
+        guard signature.code == 0 else { throw PowerError.failed(L.format("Background service failed to load: %@", signature.output)) }
         let plist = agents.appendingPathComponent(agentLabel + ".plist")
-        let body: [String: Any] = ["Label": agentLabel, "ProgramArguments": ["/bin/bash", watch.path], "StartInterval": 20, "RunAtLoad": true]
+        let body: [String: Any] = ["Label": agentLabel, "ProgramArguments": ["/bin/bash", watch.path], "KeepAlive": ["Crashed": false], "ThrottleInterval": 10, "RunAtLoad": true]
         try PropertyListSerialization.data(fromPropertyList: body, format: .xml, options: 0).write(to: plist, options: .atomic)
         let domain = "gui/\(getuid())"
         _ = execute("/bin/launchctl", ["bootout", domain + "/" + agentLabel])
+        let watcher = support.appendingPathComponent(".watcher")
+        if FileManager.default.fileExists(atPath: watcher.path) { try FileManager.default.removeItem(at: watcher) }
+        try FileManager.default.moveItem(at: staged, to: watcher)
         let result = execute("/bin/launchctl", ["bootstrap", domain, plist.path])
         guard result.code == 0 else { throw PowerError.failed(L.format("Background service failed to load: %@", result.output)) }
     }

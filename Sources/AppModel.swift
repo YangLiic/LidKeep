@@ -9,6 +9,8 @@ final class AppModel: ObservableObject {
     @Published var batteryPolicy = AfterLockPolicy.stayAwake
     @Published var acSleepWhenDisplayOff = true
     @Published var batterySleepWhenDisplayOff = true
+    @Published var screenPolicy = ScreenPolicy.load()
+    @Published var backlightControlAvailable = true
     @Published var busy = false
     @Published var banner: String?
     @Published var bannerIsError = false
@@ -20,6 +22,7 @@ final class AppModel: ObservableObject {
     private var observers: [NSObjectProtocol] = []
     private var sawExternalWithLidClosed = false
     private var lastExternalCount = 0
+    private var lidObserver: LidStateObserver?
 
     init() {
         let current = PowerManager.readStatus()
@@ -33,6 +36,9 @@ final class AppModel: ObservableObject {
         startWatchingLock()
         startWatchingWake()
         startWatchingDisplays()
+        lidObserver = LidStateObserver { [weak self] in
+            Task { @MainActor in self?.refresh() }
+        }
         PowerManager.holdLidAwakeIfWanted()
         refreshTimer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { [weak self] _ in
             Task { @MainActor in
@@ -53,6 +59,18 @@ final class AppModel: ObservableObject {
 
     func refresh() {
         status = PowerManager.readStatus()
+        backlightControlAvailable = BuiltInBrightnessAPI.display().flatMap { BuiltInBrightnessAPI.shared.read($0) } != nil
+        if !PowerManager.preview, !status.lidClosed { BuiltInBacklight().restore() }
+    }
+
+    func setScreenPolicy(_ policy: ScreenPolicy) {
+        guard !PowerManager.preview, !busy else { return }
+        screenPolicy = policy
+        UserDefaults.standard.set(policy.rawValue, forKey: ScreenPolicy.preferenceKey)
+        UserDefaults.standard.synchronize()
+        PowerManager.notifyScreenPolicyChanged()
+        refresh()
+        showBanner(L.format("Screen policy: %@", policy.title))
     }
 
     func clearOutdatedBanner() {
@@ -261,6 +279,7 @@ final class AppModel: ObservableObject {
             self.batteryPolicy = .stayAwake
             self.acSleepWhenDisplayOff = true
             self.batterySleepWhenDisplayOff = true
+            self.screenPolicy = .automatic
             self.showBanner(L.text("Helper and background service removed. Quit LidKeep, then move the app to Trash."))
         }
     }
