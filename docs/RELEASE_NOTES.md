@@ -2,6 +2,12 @@
 
 **⬇ 下载 / Download:** [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg) · [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip)
 
+**首次打开 / First launch**
+
+当前版本未经过 Apple 公证。如遇拦截，请先在「应用程序」中双击 LidKeep，点击「完成」，再进入「系统设置 → 隐私与安全性」下方的「安全性」，点击「仍要打开」，输入 Mac 登录密码并确认「打开」。**「仍要打开」在首次尝试被拦截后才会出现。**
+
+This release is not Apple-notarized. If blocked, first double-click LidKeep in Applications and click **Done**, then go to **System Settings → Privacy & Security → Security**, click **Open Anyway**, authenticate with your Mac login password, and confirm **Open**. **Open Anyway appears after macOS blocks an attempted launch.**
+
 English · 简体中文
 
 ## English

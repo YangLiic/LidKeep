@@ -17,7 +17,13 @@ LidKeep 是轻巧的原生 macOS 工具，让下载、构建与长时间任务�
 
 下载 [**DMG**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.dmg) 或 [**App ZIP**](https://github.com/YangLiic/LidKeep/releases/download/v1.0.0-rc.2/LidKeep-1.0.0-rc.2-universal-local.zip)。打开 DMG（或解压 ZIP），将 `LidKeep.app` 拖入「应用程序」，再从那里启动。
 
-**首次打开：** 当前 `local` 版本未经过 Apple 公证。若被 macOS 拦截，点击「完成」，进入「系统设置 → 隐私与安全性」下方的「安全性」，点击 LidKeep 旁的「仍要打开」，完成认证后确认「打开」。仅放行可信来源的下载。[Apple 官方说明](https://support.apple.com/zh-cn/102445)
+**首次打开：** 当前版本未经过 Apple 公证。如遇系统拦截：
+
+1. 在「应用程序」中双击 **LidKeep**，在拦截提示中点击「完成」。
+2. 打开「系统设置 → 隐私与安全性」，向下滚动至「安全性」，点击 LidKeep 旁的「仍要打开」。
+3. 输入 Mac 登录密码完成认证，再确认「打开」。
+
+**找不到「仍要打开」？先双击一次 App，触发拦截后才会出现该按钮。** 仅放行可信来源的下载。[Apple 官方说明](https://support.apple.com/zh-cn/102445)
 
 支持 **macOS 14 及以上**，提供 **Apple Silicon / Intel 通用版本**。[兼容性详情](docs/COMPATIBILITY.md)
 
