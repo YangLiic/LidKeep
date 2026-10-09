@@ -1,0 +1,33 @@
+name: Bug report
+description: Report incorrect behavior or a compatibility problem
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "For security-sensitive issues, request a private channel instead of posting exploit details."
+  - type: input
+    id: version
+    attributes:
+      label: LidKeep version
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Mac model/chip and macOS version
+      placeholder: "MacBook Pro M4, macOS 15.7.7"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected behavior and actual behavior
+      description: Include AC/battery, lid state and external display connection.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics (optional)
+      description: Paste doctor output and relevant pmset information after removing personal information.
+      render: text

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="0.75" y2="1">
+      <stop stop-color="#559AFF"/>
+      <stop offset="0.52" stop-color="#2868E5"/>
+      <stop offset="1" stop-color="#123DA1"/>
+    </linearGradient>
+    <linearGradient id="aluminium" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#C4D4EF"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#244B83"/>
+      <stop offset="1" stop-color="#10254B"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFE49A"/>
+      <stop offset="1" stop-color="#FFB84C"/>
+    </linearGradient>
+    <clipPath id="tile"><rect x="64" y="64" width="896" height="896" rx="196"/></clipPath>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <rect x="64" y="64" width="896" height="896" rx="196" fill="url(#background)"/>
+  <path d="M64 64H960V190C698 131 365 168 64 422Z" fill="#FFFFFF" opacity="0.08" clip-path="url(#tile)"/>
+  <rect x="65" y="65" width="894" height="894" rx="195" fill="none" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="2"/>
+  <ellipse cx="512" cy="763" rx="316" ry="30" fill="#062366" opacity="0.3" filter="url(#shadow)"/>
+  <rect x="202" y="278" width="620" height="386" rx="34" fill="url(#aluminium)"/>
+  <rect x="223" y="301" width="578" height="338" rx="18" fill="url(#screen)"/>
+  <rect x="470" y="300" width="84" height="13" rx="6" fill="#EFF5FF"/>
+  <g fill="none" stroke="#FFD57C" stroke-width="12" stroke-linecap="round">
+    <path d="M512 365V346M512 575V594M407 470H388M617 470H636M438 396L424 382M586 544L600 558M438 544L424 558M586 396L600 382"/>
+  </g>
+  <circle cx="512" cy="470" r="65" fill="url(#sun)"/>
+  <path d="M166 684H858L825 731Q819 742 799 742H225Q205 742 199 731Z" fill="url(#aluminium)"/>
+  <path d="M457 684H567V688Q567 699 556 699H468Q457 699 457 688Z" fill="#92A9CE"/>
+  <path d="M226 742H798" fill="none" stroke="#91ACD6" stroke-width="5" stroke-linecap="round"/>
+</svg>
