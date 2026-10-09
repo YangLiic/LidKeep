@@ -15,6 +15,7 @@ make release   # Package ZIP, DMG and checksums
 ```
 
 No developer certificate is needed for local builds.
+Packaging creates an isolated Python environment under `.build/` and installs the pinned dependencies in `scripts/requirements-packaging.txt` on first use. The DMG layout is generated from file metadata without scripting Finder.
 
 - `Sources/`: SwiftUI views, event coordination, power logic, CLI, and pure parsers.
 - `Resources/`: bundle metadata, original icon artwork, and restricted helper scripts.

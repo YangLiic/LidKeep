@@ -1,6 +1,11 @@
 # Changelog
 
-## 1.0.0-rc.1 — Unreleased
+## 1.0.0-rc.2
+
+- Bilingual drag-to-install DMG with a Retina background, positioned app and Applications icons, and a custom volume icon.
+- Clear first-launch instructions for unnotarized builds in both READMEs and user guides.
+
+## 1.0.0-rc.1 — 2026-10-09
 
 Initial release.
 

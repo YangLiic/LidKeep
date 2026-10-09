@@ -15,7 +15,9 @@ LidKeep is a lightweight, native macOS utility that keeps downloads, builds and 
 
 ## Download and install
 
-Download the **DMG or App ZIP** from [Releases](../../releases), move `LidKeep.app` to Applications, and open it.
+Download the **DMG or App ZIP** from [Releases](../../releases). Open the DMG (or extract the ZIP), drag `LidKeep.app` into **Applications**, and launch it from there.
+
+**First launch:** Current `local` releases are not Apple-notarized. If macOS blocks LidKeep, click **Done**, then go to **System Settings → Privacy & Security → Security**, click **Open Anyway** for LidKeep, authenticate, and confirm **Open**. Only allow a download you trust. [Apple's instructions](https://support.apple.com/102445)
 
 Requires **macOS 14 or later**. One universal app for **Apple Silicon and Intel**. [Compatibility details](docs/COMPATIBILITY.md)
 

@@ -18,7 +18,9 @@ The display rule runs when the last external display disconnects with the lid cl
 
 ## Installation permissions
 
-The first power change, helper upgrades and helper removal require administrator authorization. Builds labeled `local` are ad-hoc signed and not notarized. If macOS blocks a trusted download, use its **Open Anyway** option in System Settings → Privacy & Security.
+Builds labeled `local` are ad-hoc signed and not Apple-notarized. Install the app in Applications before opening it. If macOS blocks a trusted download, click **Done**, then open **System Settings → Privacy & Security** and scroll to **Security**. Click **Open Anyway** beside LidKeep, authenticate, and confirm **Open** in the subsequent dialog. Replacing or downloading another copy may require another confirmation. [Apple's instructions](https://support.apple.com/102445)
+
+The first power change, helper upgrades and helper removal request administrator authorization separately. Accessibility permission is not required.
 
 Keep the Mac ventilated while running closed and allow sleep before putting it in a bag.
 

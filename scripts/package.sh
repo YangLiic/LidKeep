@@ -26,8 +26,9 @@ stage=$(mktemp -d .build/dmg.XXXXXX)
 trap 'rm -rf "$stage"' EXIT
 cp -R "$app" "$stage/"
 ln -s /Applications "$stage/Applications"
-cp LICENSE "$stage/License.txt"
-cat > "$stage/Read Me.txt" <<EOF
+mkdir "$stage/.info"
+cp LICENSE "$stage/.info/License.txt"
+cat > "$stage/.info/Read Me.txt" <<EOF
 LidKeep $version — $suffix
 
 English
@@ -37,6 +38,8 @@ The first power change requires administrator authorization.
 Quitting does not restore power settings.
 To uninstall: choose Uninstall power helper, authorize, quit, then move the app to Trash.
 Builds labeled local are ad-hoc signed and not notarized.
+If macOS blocks a trusted download: click Done, open System Settings > Privacy & Security,
+scroll to Security, choose Open Anyway for LidKeep, authenticate, then confirm Open.
 
 简体中文
 需要 macOS 14 或更新版本。将 LidKeep.app 拖入「应用程序」后打开。
@@ -44,10 +47,23 @@ App 支持中文与英文，可通过窗口中的语言选择器切换。
 首次修改电源设置需要管理员认证。退出不会恢复电源设置。
 卸载时请先选择「卸载电源助手」，完成认证，退出后将 App 移到废纸篓。
 标记为 local 的构建只有临时签名，未经过 Apple 公证。
+若 macOS 拦截可信下载：点击「完成」，进入「系统设置 > 隐私与安全性」下方的「安全性」，
+点击 LidKeep 旁的「仍要打开」，完成认证，并在后续弹窗中确认「打开」。
 EOF
+python=.build/packaging-venv/bin/python
+if [[ ! -x "$python" ]]; then python3 -m venv .build/packaging-venv; fi
+if ! "$python" -c 'from importlib.metadata import version; assert version("ds-store") == "1.3.1" and version("mac-alias") == "2.2.2"' 2>/dev/null; then
+  "$python" -m pip install --disable-pip-version-check -r scripts/requirements-packaging.txt
+fi
+background=.build/DMG-background@2x.png
+if [[ "$suffix" == notarized ]]; then
+  xcrun swift scripts/make-dmg-background.swift "$background" --notarized
+else
+  xcrun swift scripts/make-dmg-background.swift "$background"
+fi
 rm -f "$zip" "$dmg"
 ditto -c -k --sequesterRsrc --keepParent "$app" "$zip"
-hdiutil create -quiet -volname LidKeep -srcfolder "$stage" -ov -format UDZO "$dmg"
+"$python" scripts/make-dmg.py "$stage" "$background" "$app/Contents/Resources/AppIcon.icns" "$dmg"
 if [[ "$suffix" == notarized ]]; then
   codesign --timestamp --sign "${SIGN_IDENTITY:?Set SIGN_IDENTITY to sign the DMG}" "$dmg"
   xcrun notarytool submit "$dmg" --keychain-profile "$NOTARY_PROFILE" --wait
